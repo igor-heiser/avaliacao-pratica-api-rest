@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: api-telemetria
+
+  # Configuração da Fonte de Dados (MySQL)
+  datasource:
+    url: jdbc:mysql://localhost:3307/TelemetriaMotores?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: industria_user
+    password: 123@Mudar
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Configuração do JPA / Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    # Garante que o Hibernate crie as tabelas PRIMEIRO
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+# Configuração do Servidor
+server:
+  port: 8181

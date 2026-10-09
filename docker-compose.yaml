@@ -1,0 +1,16 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: telemetria-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: TelemetriaMotores
+      MYSQL_USER: McQueen
+      MYSQL_PASSWORD: 123@Mudar
+    volumes:
+      - mysql_telemetria_data:/var/lib/mysql
+
+volumes:
+  mysql_telemetria_data:
