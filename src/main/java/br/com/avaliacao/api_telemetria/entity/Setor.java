@@ -3,6 +3,9 @@ package br.com.avaliacao.api_telemetria.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * Dados que um setor possui.
+ */
 @Entity
 @Table(name = "setores")
 @Getter

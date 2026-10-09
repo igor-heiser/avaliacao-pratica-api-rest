@@ -4,6 +4,9 @@ import br.com.avaliacao.api_telemetria.entity.Setor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Repositório que manipula e armazena os dados dos setores no banco de dados.
+ */
 @Repository
 public interface SetorRepository extends JpaRepository<Setor, Integer> {
     boolean existsByNomeIgnoreCase(String nome);

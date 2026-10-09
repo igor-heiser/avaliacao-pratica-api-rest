@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Repositório que manipula e armazena os dados das telemetrias no banco de dados.
+ */
 @Repository
 public interface HistoricoTelemetriaRepository extends JpaRepository<HistoricoTelemetria, Long> {
     Page<HistoricoTelemetria> findByMotorIdOrderByDataHoraDesc(Integer motorId, Pageable pageable);

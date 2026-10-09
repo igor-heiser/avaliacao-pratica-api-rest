@@ -6,6 +6,9 @@ import br.com.avaliacao.api_telemetria.entity.HistoricoTelemetria;
 import br.com.avaliacao.api_telemetria.entity.Motor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Conversão dos dados de uma telemetria.
+ */
 @Component
 public class TelemetriaMapper {
     public HistoricoTelemetria toEntity(TelemetriaRequestDTO dto, Motor motor) {

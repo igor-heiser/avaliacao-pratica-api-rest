@@ -6,6 +6,9 @@ import br.com.avaliacao.api_telemetria.entity.AlertaMotor;
 import br.com.avaliacao.api_telemetria.entity.Motor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Conversão dos dados de um alerta.
+ */
 @Component
 public class AlertaMapper {
     public AlertaMotor toEntity(AlertaRequestDTO dto, Motor motor) {

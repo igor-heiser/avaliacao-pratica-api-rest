@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Repositório que manipula e armazena os dados dos alertas no banco de dados.
+ */
 @Repository
 public interface AlertaMotorRepository extends JpaRepository<AlertaMotor, Integer> {
     Page<AlertaMotor> findByMotorIdOrderByDataAlertaDesc(Integer motorId, Pageable pageable);

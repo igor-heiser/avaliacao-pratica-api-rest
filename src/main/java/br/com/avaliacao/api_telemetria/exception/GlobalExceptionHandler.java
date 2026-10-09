@@ -13,8 +13,17 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Centraliza o tratamento das exceções da API.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * Trata o erro quando a entidade não foi encontrada.
+     * @param ex exceção recebida por parametro
+     * @return retorna a mensagem com o erro tratado
+     */
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleNotFound(EntityNotFoundException ex) {
         ErrorResponseDTO error = new ErrorResponseDTO(
@@ -25,6 +34,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    /**
+     * Trata o erro quando uma regra de negócio foi violada.
+     * @param ex exceção recebida por parametro
+     * @return retorna a mensagem com o erro tratado
+     */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponseDTO> handleIllegalArgument(IllegalArgumentException ex) {
         ErrorResponseDTO error = new ErrorResponseDTO(
@@ -35,6 +49,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    /**
+     * Trata o erro quando um ou mais campos da requisição são inválidos.
+     * @param ex exceção recebida por parametro
+     * @return retorna a mensagem com o erro tratado
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleValidationErrors(MethodArgumentNotValidException ex) {
         Map<String, String> fieldErrors = new HashMap<>();
@@ -51,6 +70,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    /**
+     * Trata o erro quando acontece um erro inesperado no servidor.
+     * @param ex exceção recebida por parametro
+     * @return retorna a mensagem com o erro tratado
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGenericException(Exception ex) {
         ErrorResponseDTO error = new ErrorResponseDTO(

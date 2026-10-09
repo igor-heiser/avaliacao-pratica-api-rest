@@ -6,6 +6,9 @@ import br.com.avaliacao.api_telemetria.entity.Motor;
 import br.com.avaliacao.api_telemetria.entity.Setor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Conversão dos dados de um motor.
+ */
 @Component
 public class MotorMapper {
     public Motor toEntity(MotorRequestDTO dto, Setor setor) {

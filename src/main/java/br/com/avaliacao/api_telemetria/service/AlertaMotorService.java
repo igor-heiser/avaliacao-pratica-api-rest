@@ -14,6 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Serviço responsável pelas válidações e regras de negócio referente aos alertas.
+ */
 @Service
 public class AlertaMotorService {
     private final AlertaMotorRepository alertaRepository;
@@ -26,6 +29,11 @@ public class AlertaMotorService {
         this.alertaMapper = alertaMapper;
     }
 
+    /**
+     * Cria um novo alerta após validar se o identificador único do motor existe.
+     * @param dto requisição recebida com os dados necessários para cadastrar um alerta
+     * @return retorna um DTO de resposta com os dados do alerta criado
+     */
     @Transactional
     public AlertaResponseDTO criar(AlertaRequestDTO dto) {
         Motor motor = motorRepository.findById(dto.motorId())
@@ -35,18 +43,35 @@ public class AlertaMotorService {
         return alertaMapper.toDTO(alertaRepository.save(alerta));
     }
 
+    /**
+     * Lista todos os alertas cadastrados
+     * @param pageable paginação recebida
+     * @return retorna todos os alertas cadastrados
+     */
     @Transactional(readOnly = true)
     public Page<AlertaResponseDTO> listarTodos(Pageable pageable) {
         return alertaRepository.findAll(pageable)
                 .map(alertaMapper::toDTO);
     }
 
+    /**
+     * Lista todos os alertas por status de suas resoluções
+     * @param resolvido parâmetro recebido para filtrar o status de resolução dos alertas
+     * @param pageable paginação recebida
+     * @return retorna todos os alertas filtrados por status de resolução
+     */
     @Transactional(readOnly = true)
     public Page<AlertaResponseDTO> listarPorStatusResolucao(Boolean resolvido, Pageable pageable) {
         return alertaRepository.findByResolvidoOrderByDataAlertaDesc(resolvido, pageable)
                 .map(alertaMapper::toDTO);
     }
 
+    /**
+     * Lista um alerta pelo identificador único de um motor após valdiar a existência do identificador único do motor.
+     * @param motorId identificador único do motor a ser buscado
+     * @param pageable paginação recebida
+     * @return retorna o alerta que possui o identificador único do motor informado
+     */
     @Transactional(readOnly = true)
     public Page<AlertaResponseDTO> buscarPorMotor(Integer motorId, Pageable pageable) {
         if (!motorRepository.existsById(motorId)) {
@@ -56,6 +81,12 @@ public class AlertaMotorService {
                 .map(alertaMapper::toDTO);
     }
 
+    /**
+     * Atualiza o status de resolução de um alerta pelo seu identificador único após validar a existência do seu identificador único.
+     * @param id identificador único do alerta a ser atualizado
+     * @param dto requisição recebida com o dado necessário para atualizar o status de resolução de um alerta
+     * @return retorna um DTO de resposta com os dados do alerta atualizado
+     */
     @Transactional
     public AlertaResponseDTO atualizarStatusResolucao(Integer id, AlertaResolucaoDTO dto) {
         AlertaMotor alerta = alertaRepository.findById(id)

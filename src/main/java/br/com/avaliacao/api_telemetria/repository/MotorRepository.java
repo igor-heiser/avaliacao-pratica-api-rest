@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repositório que manipula e armazena os dados dos motores no banco de dados.
+ */
 @Repository
 public interface MotorRepository extends JpaRepository<Motor, Integer>{
     Optional<Motor> findByCodigoAtivo(String codigoAtivo);

@@ -5,6 +5,9 @@ import br.com.avaliacao.api_telemetria.dto.SetorResponseDTO;
 import br.com.avaliacao.api_telemetria.entity.Setor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Conversão dos dados de um setor.
+ */
 @Component
 public class SetorMapper {
 

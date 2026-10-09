@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Serviço responsável pela manipulação dos dados de um setor e validação regras de negócio.
+ * Serviço responsável pelas válidações e regras de negócio referente aos setores.
  */
 @Service
 public class SetorService {
@@ -39,12 +39,22 @@ public class SetorService {
         return setorMapper.toDTO(setorRepository.save(setor));
     }
 
+    /**
+     * Lista todos os setores cadastrados
+     * @param pageable páginação recebida
+     * @return retorna todos os setores cadastrados
+     */
     @Transactional(readOnly = true)
     public Page<SetorResponseDTO> listarTodos(Pageable pageable) {
         return setorRepository.findAll(pageable)
                 .map(setorMapper::toDTO);
     }
 
+    /**
+     * Lista um setor pelo seu identificador único após validar a existência do seu identificador único.
+     * @param id identificador único do setor a ser buscado
+     * @return retorn um DTO de resposta com os dados do setor que possui o identificador único informado
+     */
     @Transactional(readOnly = true)
     public SetorResponseDTO buscarPorId(Integer id) {
         return setorRepository.findById(id)
@@ -52,6 +62,12 @@ public class SetorService {
                 .orElseThrow(() -> new EntityNotFoundException("Setor não encontrado para o ID: " + id));
     }
 
+    /**
+     * Atualiza um setor através do seu identificador único informado após validar a existência do seu identificador único informado.
+     * @param id identificador único do setor a ser atualizado
+     * @param dto requisição recebida com os dados necessários para atualizar um setor
+     * @return retorna um DTO de resposta com os dados do setor atualizado que possui o identificador único informado
+     */
     @Transactional
     public SetorResponseDTO atualizar(Integer id, SetorRequestDTO dto) {
         Setor setor = setorRepository.findById(id)

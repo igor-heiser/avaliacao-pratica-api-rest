@@ -5,6 +5,9 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Dados que um motor possui.
+ */
 @Entity
 @Table(name = "motores")
 @Getter
